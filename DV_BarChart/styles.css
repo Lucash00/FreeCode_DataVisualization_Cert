@@ -1,0 +1,86 @@
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .container {
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    width: 950px;
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  /* SVG container */
+  svg {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #fafafa;
+  }
+  
+  /* Ejes y barras */
+  .axis path,
+  .axis line {
+    fill: none;
+    shape-rendering: crispEdges;
+    stroke: #555;
+    stroke-width: 1px;
+  }
+  
+  .bar {
+    fill: #2e8b57;
+    opacity: 0.8;
+  }
+  
+  .bar:hover {
+    fill: #3cb371;
+    opacity: 1;
+  }
+  
+/* Tooltip */
+#tooltip {
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  pointer-events: all;  /* Permitir interacción con el tooltip */
+  font-size: 14px;
+  z-index: 10; /* Asegúrate de que el tooltip se muestre sobre otros elementos */
+  transition: opacity 0.2s ease;
+  display: block;
+  opacity: 0; /* Comienza invisible */
+}
+
+#tooltip p {
+  margin: 0;
+}
+
+  
+  /* Mejorar la visualización en pantallas pequeñas */
+  @media screen and (max-width: 1024px) {
+    .container {
+      width: 90%;
+      margin: 10px;
+    }
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+  
