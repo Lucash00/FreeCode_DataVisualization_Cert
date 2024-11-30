@@ -18,7 +18,7 @@ body {
   width: 950px;
   text-align: center;
   display: flex;
-  flex-direction: column;  /* Cambiar la dirección a columna */
+  flex-direction: column; 
   align-items: center;
 }
 
@@ -34,8 +34,8 @@ svg {
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #fafafa;
-  width: 100%;  /* Asegura que el SVG ocupe todo el ancho disponible */
-  height: 500px;  /* Asigna una altura fija */
+  width: 100%;  
+  height: 500px;  
 }
 
 /* Ejes y barras */

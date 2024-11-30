@@ -47,7 +47,7 @@ window.onload = function() {
           .attr("id", "y-axis")
           .call(d3.axisLeft(y).ticks(6));
 
-        // Agregar las barras al gráfico
+        // barras del gráfico
         svg.selectAll(".bar")
           .data(processedData)
           .enter().append("rect")
@@ -62,7 +62,7 @@ window.onload = function() {
         // Crear el tooltip en el DOM
         const tooltip = d3.select("body").append("div").attr("id", "tooltip");
 
-        // Al pasar el ratón sobre una barra
+        // Hover sobre una barra
         svg.selectAll(".bar")
           .on("mouseover", function(event, d) {
             tooltip.transition().duration(200).style("opacity", .9);  // Mostrar el tooltip
