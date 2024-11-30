@@ -14,26 +14,26 @@ window.onload = function () {
     // Cargar los datos desde la URL proporcionada
     const url = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json";
     d3.json(url).then(data => {
-        // Ajustar el dominio X para incluir un año extra al principio y al final
+        // Ajustar el dominio X incluyendo un año extra al principio y al final
         const xDomain = d3.extent(data, d => new Date(d.Year, 0));
-        xDomain[0] = new Date(xDomain[0].getFullYear() - 1, 0); // Añadir un año antes
-        xDomain[1] = new Date(xDomain[1].getFullYear() + 1, 0); // Añadir un año después
+        xDomain[0] = new Date(xDomain[0].getFullYear() - 1, 0); 
+        xDomain[1] = new Date(xDomain[1].getFullYear() + 1, 0); 
 
         // Parsear los tiempos del dominio Y
         const times = data.map(d => d3.timeParse("%M:%S")(d.Time));
         const yDomain = d3.extent(times);
 
-        // Extender el dominio Y: -1 segundo al mínimo y +1 segundo al máximo
-        yDomain[0] = new Date(yDomain[0].getTime() - 5000); // Restar 1 segundo
-        yDomain[1] = new Date(yDomain[1].getTime() + 5000); // Sumar 1 segundo
+        // Extender el dominio Y: -5 segundo al mínimo y +5 segundo al máximo
+        yDomain[0] = new Date(yDomain[0].getTime() - 5000); 
+        yDomain[1] = new Date(yDomain[1].getTime() + 5000); 
 
         // Crear escalas
         const xScale = d3.scaleTime()
-            .domain(xDomain) // Usar el dominio ajustado
+            .domain(xDomain) 
             .range([0, innerWidth]);
 
         const yScale = d3.scaleTime()
-            .domain(yDomain) // Usar el dominio ajustado
+            .domain(yDomain) 
             .range([0, innerHeight]);
 
         // Crear los ejes
@@ -93,13 +93,13 @@ window.onload = function () {
         // Contenedor de la leyenda
         const legendGroup = svg.append("g")
             .attr("id", "legend-container")
-            .attr("transform", `translate(${width - margin.right - 150}, ${margin.top})`); // Ajustar posición a la derecha
+            .attr("transform", `translate(${width - margin.right - 150}, ${margin.top})`); 
 
         // Añadir título de la leyenda
         legendGroup.append("text")
             .attr("id", "legend-title")
             .attr("x", 0)
-            .attr("y", -20) // Colocar el título justo encima del rectángulo
+            .attr("y", -20) 
             .style("text-anchor", "start")
             .style("font-size", "14px")
             .style("font-weight", "bold")
@@ -110,13 +110,13 @@ window.onload = function () {
             .attr("id", "legend-background")
             .attr("x", -10)
             .attr("y", -10)
-            .attr("width", 160) // Ajustar al tamaño necesario
-            .attr("height", 50) // Ajustar al tamaño necesario
+            .attr("width", 160) 
+            .attr("height", 50) 
             .attr("fill", "white")
             .attr("stroke", "black")
             .attr("stroke-width", 1)
-            .attr("rx", 5) // Bordes redondeados (opcional)
-            .attr("ry", 5); // Bordes redondeados (opcional)
+            .attr("rx", 5) 
+            .attr("ry", 5); 
 
         // Añadir los elementos de la leyenda
         const legend = legendGroup.selectAll(".legend")
@@ -162,7 +162,7 @@ window.onload = function () {
         // Añadir eventos para mostrar y ocultar el tooltip y las líneas
         svg.selectAll(".dot")
             .on("mouseover", (event, d) => {
-                const pointColor = d.Doping ? "red" : "green"; // Determinar el color basado en el dato
+                const pointColor = d.Doping ? "red" : "green"; 
 
                 // Mostrar el tooltip
                 tooltip.transition().style("opacity", 1);
@@ -178,14 +178,14 @@ window.onload = function () {
 
                 // Mostrar las líneas y posicionarlas con el color correspondiente
                 verticalLine.transition().style("opacity", 1)
-                    .attr("stroke", pointColor) // Aplicar color dinámico
+                    .attr("stroke", pointColor) 
                     .attr("x1", xScale(new Date(d.Year, 0)) + margin.left)
-                    .attr("y1", yScale(d3.timeParse("%M:%S")(d.Time)) + margin.top) // Empieza en el punto
+                    .attr("y1", yScale(d3.timeParse("%M:%S")(d.Time)) + margin.top) 
                     .attr("x2", xScale(new Date(d.Year, 0)) + margin.left)
-                    .attr("y2", height - margin.bottom); // Termina en el límite inferior
+                    .attr("y2", height - margin.bottom); 
 
                 horizontalLine.transition().style("opacity", 1)
-                    .attr("stroke", pointColor) // Aplicar color dinámico
+                    .attr("stroke", pointColor) 
                     .attr("x1", margin.left)
                     .attr("y1", yScale(d3.timeParse("%M:%S")(d.Time)) + margin.top)
                     .attr("x2", xScale(new Date(d.Year, 0)) + margin.left)
