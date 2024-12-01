@@ -1,5 +1,5 @@
 // Asegurarse de que el código se ejecute cuando el DOM esté listo
-window.onload = function() {
+window.onload = function () {
   const url = "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json";
 
   async function fetchData() {
@@ -37,10 +37,10 @@ window.onload = function() {
           .range([height, 0]);
 
         svg.append("g")
-        .attr("class", "x-axis")
-        .attr("id", "x-axis")
-        .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y")));
+          .attr("class", "x-axis")
+          .attr("id", "x-axis")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x).tickFormat(d3.timeFormat("%Y")));
 
         svg.append("g")
           .attr("class", "y-axis")
@@ -62,22 +62,23 @@ window.onload = function() {
         // Crear el tooltip en el DOM
         const tooltip = d3.select("body").append("div").attr("id", "tooltip");
 
+
         // Hover sobre una barra
         svg.selectAll(".bar")
-          .on("mouseover", function(event, d) {
+          .on("mouseover", function (event, d) {
             tooltip.transition().duration(200).style("opacity", .9);  // Mostrar el tooltip
             tooltip.html(`
               <p>Date: ${d.date.toISOString().split('T')[0]}</p>
               <p>GDP: $${d.gdp.toFixed(2)}</p>
             `)
-            .attr("data-date", d.date.toISOString())
-            .style("left", (event.pageX + 10) + "px")  // Posicionar tooltip en X
-            .style("top", (event.pageY - 28) + "px"); // Posicionar tooltip en Y
+              .attr("data-date", d.date.toISOString().split('T')[0])  // Asegurarse de que el tooltip tenga solo la fecha (sin la parte de la hora)
+              .style("left", (event.pageX + 10) + "px")  // Posicionar tooltip en X
+              .style("top", (event.pageY - 28) + "px"); // Posicionar tooltip en Y
           })
-          .on("mouseout", function() {
+          .on("mouseout", function () {
             tooltip.transition().duration(200).style("opacity", 0);  // Ocultar el tooltip
           });
-
+          
         console.log("Datos procesados correctamente y gráfico generado.");
       } else {
         console.log("No se pudo procesar los datos correctamente.");
