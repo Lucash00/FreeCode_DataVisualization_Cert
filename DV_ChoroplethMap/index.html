@@ -8,7 +8,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
   </head>
   <body>
+    <h1 id="title">US Education Choropleth Map</h1>
+    <p id="description">
+      This map shows the percentage of people with a bachelor's degree or higher in each U.S. county.
+    </p>
     <div id="map" style="width: 960px; height: 600px;"></div>
+    <div id="legend"></div>
+    <div id="tooltip" style="position: absolute; background: rgba(0, 0, 0, 0.7); color: white; padding: 5px; display: none;"></div>
     <script src="choroplethMap.js"></script>
   </body>
 </html>
