@@ -1,0 +1,87 @@
+/* General */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #d2d2d2;
+  color: #333;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin-top: 20px;
+  color: #313695;
+}
+
+#description {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Gráfico */
+#chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 90%;
+}
+
+
+/* Ejes */
+#x-axis text, #y-axis text {
+  font-size: 12px;
+  fill: #555;
+}
+
+#x-axis path, #y-axis path, #x-axis line, #y-axis line {
+  stroke: #bbb;
+}
+.axis-label {
+  font-size: 16px;
+  fill: #555;
+  font-weight: bold;
+}
+
+
+/* Celdas */
+.cell {
+  stroke: #fff;
+  stroke-width: 0.5;
+  transition: fill 0.2s ease, transform 0.2s ease;
+  box-sizing: border-box;
+}
+
+.cell.highlight {
+  stroke: black;
+  stroke-width: 2px;
+  z-index: 1;
+}
+
+
+/* Leyenda */
+#legend {
+  margin-top: 10px;
+}
+
+#legend rect {
+  stroke: #333;
+}
+
+/* Tooltip */
+#tooltip {
+  font-size: 0.9em;
+  text-align: left;
+  border: 1px solid #ddd;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  z-index: 10;
+}
