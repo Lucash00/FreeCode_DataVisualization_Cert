@@ -92,7 +92,7 @@ window.onload = function () {
         ];
         // Contenedor de la leyenda
         const legendGroup = svg.append("g")
-            .attr("id", "legend-container")
+            .attr("id", "legend")
             .attr("transform", `translate(${width - margin.right - 150}, ${margin.top})`); 
 
         // Añadir título de la leyenda
