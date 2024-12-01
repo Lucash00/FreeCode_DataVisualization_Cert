@@ -7,6 +7,8 @@ window.onload = function () {
         d3.json(countiesDataUrl),
         d3.json(educationDataUrl)
     ]).then(([countiesData, educationData]) => {
+        console.log(educationData);  // Aquí ves los datos cargados de educación
+
         const width = 960;
         const height = 600;
 
@@ -20,6 +22,7 @@ window.onload = function () {
 
         // Convertir TopoJSON a GeoJSON para los condados
         const counties = topojson.feature(countiesData, countiesData.objects.counties).features;
+        console.log(counties);  // Aquí ves los datos de los condados
 
         // Crear un diccionario de los datos de educación usando el código FIPS
         const educationByFips = {};
@@ -31,8 +34,6 @@ window.onload = function () {
         const colorScale = d3.scaleQuantize()
             .domain([0, d3.max(educationData, d => d.bachelorsOrHigher)])
             .range(["#C4E6FF", "#8BC8F6", "#64AFE5", "#4897D1", "#247EC1", "#0062A9"]);
-
-
 
         // Dibujar los condados en el mapa
         svg.selectAll("path")
@@ -51,7 +52,7 @@ window.onload = function () {
             .attr("data-education", d => educationByFips[d.id])
             .on("mouseover", function (event, d) {
                 const education = educationByFips[d.id];
-                const countyName = countiesData.objects.counties.geometries.find(c => c.id === d.id).properties.name;
+                const countyName = educationData.find(e => e.fips === d.id)?.area_name || 'Unknown County';
                 const tooltip = d3.select("#tooltip");
 
                 tooltip.transition().duration(200).style("opacity", 0.9);
@@ -89,11 +90,13 @@ window.onload = function () {
             .attr("height", legendHeight)
             .attr("fill", d => d);
 
+        // Añadir texto a la leyenda
         legend.append("text")
             .attr("x", 0)
             .attr("y", 30)
             .text("Education (Bachelor's Degree or Higher)")
             .style("font-size", "14px");
+
     }).catch(err => {
         console.error("Error al cargar los datos:", err);
     });
