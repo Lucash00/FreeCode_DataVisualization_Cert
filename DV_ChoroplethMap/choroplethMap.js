@@ -20,8 +20,9 @@ window.onload = function () {
 
         const path = d3.geoPath();
 
-        // Convertir TopoJSON a GeoJSON para los condados
+        // Convertir TopoJSON a GeoJSON para los condados y los estados
         const counties = topojson.feature(countiesData, countiesData.objects.counties).features;
+        const states = topojson.feature(countiesData, countiesData.objects.states).features;
         console.log(counties);  // Aquí ves los datos de los condados
 
         // Crear un diccionario de los datos de educación usando el código FIPS
@@ -35,8 +36,19 @@ window.onload = function () {
             .domain([0, d3.max(educationData, d => d.bachelorsOrHigher)])
             .range(["#C4E6FF", "#8BC8F6", "#64AFE5", "#4897D1", "#247EC1", "#0062A9"]);
 
-        // Dibujar los condados en el mapa
-        svg.selectAll("path")
+        // Dibujar las fronteras de los estados con un grosor más grueso
+        svg.selectAll(".state")
+            .data(states)
+            .enter()
+            .append("path")
+            .attr("class", "state")
+            .attr("d", path)
+            .attr("fill", "none")
+            .attr("stroke", "#333")
+            .attr("stroke-width", "0.5px");
+
+        // Dibujar los condados con un grosor más fino
+        svg.selectAll(".county")
             .data(counties)
             .enter()
             .append("path")
@@ -47,16 +59,18 @@ window.onload = function () {
                 return education ? colorScale(education) : "#ccc";
             })
             .attr("stroke", "#333")
-            .attr("stroke-width", "0.5px")
+            .attr("stroke-width", "2px")
             .attr("data-fips", d => d.id)
             .attr("data-education", d => educationByFips[d.id])
             .on("mouseover", function (event, d) {
                 const education = educationByFips[d.id];
-                const countyName = educationData.find(e => e.fips === d.id)?.area_name || 'Unknown County';
+                const countyData = educationData.find(e => e.fips === d.id);
+                const countyName = countyData ? countyData.area_name : 'Unknown County';
+                const state = countyData ? countyData.state : 'Unknown State';
                 const tooltip = d3.select("#tooltip");
 
                 tooltip.transition().duration(200).style("opacity", 0.9);
-                tooltip.html(`${countyName}: ${education}% with bachelor's degree or higher`)
+                tooltip.html(`${countyName}, ${state}: ${education}%`)
                     .attr("data-education", education)
                     .style("left", `${event.pageX + 10}px`)
                     .style("top", `${event.pageY - 28}px`);
