@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treemap Diagram</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <a id="videogames-link" data-url="https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json">Video Games</a>
+        <a id="movies-link" data-url="https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/movie-data.json">Movies</a>
+        <a id="kickstarter-link" data-url="https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/kickstarter-funding-data.json">Kickstarter</a>
+    </nav>
+    <h1 id="title">Video Games Sales</h1>
+    <p id="description">Top 100 video games that have generated the most money grouped by category</p>
+    <div id="treemap"></div>
+    <div id="legend"></div>
+    <div id="tooltip"></div>
+    <script src="treemap.js"></script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</body>
+</html>
